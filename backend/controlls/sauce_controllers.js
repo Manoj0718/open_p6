@@ -1,6 +1,8 @@
 const Sauce = require("../models/sauce_models");
 const fs = require("fs");
 
+
+//*GET function - All Products//
 exports.getAllSauces = (req, res, next) => {
     Sauce.find()
         .then((sauces) => {
@@ -14,6 +16,8 @@ exports.getAllSauces = (req, res, next) => {
         });
 };
 
+
+//** GET _ID product */
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
@@ -25,9 +29,11 @@ exports.getOneSauce = (req, res, next) => {
         });
 };
 
+//*POST  function**//
 exports.createOneSauce = (req, res, next) => {
-    const url = req.protocol + "://" + req.get("host");
+
     req.body.sauce = JSON.parse(req.body.sauce); //*working json object
+    const url = req.protocol + "://" + req.get("host");
 
     const sauce = new Sauce({
         userId: req.body.sauce.userId,
@@ -35,7 +41,7 @@ exports.createOneSauce = (req, res, next) => {
         manufacturer: req.body.sauce.manufacturer,
         description: req.body.sauce.description,
         mainPepper: req.body.sauce.mainPepper,
-        imageUrl: url + "/images/" + req.file.filename,
+        imageUrl: url + '/images/' + req.file.filename,
         heat: req.body.sauce.heat,
         //*new item don't have likes//
         likes: 0,
@@ -52,6 +58,7 @@ exports.createOneSauce = (req, res, next) => {
         });
 };
 
+//* PUT function //
 exports.updateSauce = (req, res, next) => {
     let sauce = new Sauce({ _id: req.params.id });
     if (req.file) {
@@ -87,6 +94,8 @@ exports.updateSauce = (req, res, next) => {
         });
 };
 
+
+//* DELETE FUNCTION//
 exports.deleteOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
@@ -106,6 +115,7 @@ exports.deleteOneSauce = (req, res, next) => {
         });
 };
 
+//*----------Like Dislike Function----------------//
 // If like = -1, the user dislikes the sauce.The
 //user's ID must be added to or removed from the appropriate array.
 // array.push
@@ -125,13 +135,16 @@ exports.likeSauce = (req, res, next) => {
                 sauce.likes = sauce.likes + 1;
                 message = "One Like more ";
             }
-        }
+        } //*useing array include method to check certain values include in the array=>this return True False statement// 
         if (req.body.like === 0) {
             if (sauce.usersLiked.includes(req.body.userId)) {
                 sauce.usersLiked = sauce.usersLiked.filter(
                     (e) => e !== req.body.userId
                 );
-
+            } else if (sauce.usersDisliked.includes(req.body.userId)) {
+                sauce.usersDisliked = sauce.usersDisliked.filter(
+                    (e) => e !== req.body.userId
+                );
             }
         }
         if (req.body.like === -1) {
@@ -143,7 +156,7 @@ exports.likeSauce = (req, res, next) => {
                 );
                 sauce.dislikes += 1;
                 sauce.usersDisliked.push(req.body.userId);
-                message = "Sauce disliked!";
+                message = "Sauce disliked! by " + req.body.userId;
             }
         }
         sauce

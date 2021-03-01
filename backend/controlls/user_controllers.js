@@ -2,8 +2,10 @@ const User = require("../models/user_models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+//? sign up function ------//
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10).then((hash) => {
+    //* security  bcrypt and long* //*User password must be encrypted. -ok//
+    bcrypt.hash(req.body.password, 12).then((hash) => {
         const user = new User({
             email: req.body.email,
             password: hash,
@@ -19,6 +21,8 @@ exports.signup = (req, res, next) => {
     });
 };
 
+
+//-------------//?Login Function --------------------------------
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email }).then((user) => {
         if (!user) {

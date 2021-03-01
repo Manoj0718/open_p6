@@ -8,11 +8,12 @@ const authentication = require("../middleware/user_middleware");
 //*routes for sauces **//
 
 router.get("/", authentication, sauceCtrl.getAllSauces);
-router.get("/:id", authentication, sauceCtrl.getOneSauce);
 router.post("/", authentication, multer, sauceCtrl.createOneSauce);
+router.get("/:id", authentication, sauceCtrl.getOneSauce);
 router.put("/:id", authentication, multer, sauceCtrl.updateSauce);
+router.post("/:id/like", authentication, sauceCtrl.likeSauce);
 router.delete("/:id", authentication, sauceCtrl.deleteOneSauce);
-router.post("/:id/like", authentication, sauceCtrl.likeSauce)
+
 
 module.exports = router;
 

@@ -24,11 +24,14 @@ Logging in with the registered email and matching password -- When logging in, j
         User logged in
 Every user has the same privilege: every one of them are Users, who can leave Feedbacks (Like or Dislike) on each others posts, until a User posting a sauce (Add sauce option), then this User (and only this) gets the Admin (Owner of the post) privilege for the sauce(s) he/she posted. It means, that he/she can Delete or Modify the sauce he/she created.
 
-Add sauce option:
+        Add sauce option:
 each user able to add a sauce (use POST method) to the database, which is going to be listed (with GET method) on the All sauces page -- When a user adds a sauce to the database, he/she fulfills a Sauce model (main array) which contains required objects, - such as userId, name, manufacturer,description, mainPepper, imageUrl, heat, usersLiked, usersDisliked - and non required objects - such as likes, dislikes. --- Required objects are for identifying a sauce and its owner - the User who created it. Also contains the userId of a user who liked or disliked it. --- Non required objects are the number of likes and/or dislikes left on a sauce.
 
-Likes and Dislikes: every user able to leave feedback on each sauces. Each sauce can take 1 type of feedback from a user: either Like or Dislike. -- If a user wants to change the feedback he/she left, he/she must remove the existing feedback and add the opposite.
+        Likes and Dislikes: 
+every user able to leave feedback on each sauces. Each sauce can take 1 type of feedback from a user: either Like or Dislike. -- If a user wants to change the feedback he/she left, he/she must remove the existing feedback and add the opposite.
 
-Modifying the post: only the owner of the sauce (created by) able to modify all the details of the post - such as name, heat, image.
+        Modifying the post: 
+only the owner of the sauce (created by) able to modify all the details of the post - such as name, heat, image.
 
-Deleting the post: only the owner of the sauce (created by) able to delete the post
+         Deleting the post: 
+only the owner of the sauce (created by) able to delete the post

@@ -13,23 +13,15 @@ const app = express();
 
 //-------------//?  Here the start  of useing .env file //---------------
 //-----------------//mangoDB database replaced by Dotenv file-----//
-// mongoose.connect(process.env.MANGODb_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-//     .then(() => {
-//         console.log('MangoDB connected wth new database for project06');
-//     })
-//     .catch((error) => {
-//         console.log("unable to connect MangoDB");
-//         console.error(error);
-//     });
-//------------//? End of useing .env file --------//
-mongoose.connect('mongodb+srv://manoj:0718021627@cluster0.7x2mk.mongodb.net/<openSchool_p6>?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-    .then(() => {
-        console.log('MangoDB connected wth new database for project06');
-    })
-    .catch((error) => {
-        console.log("unable to connect MangoDB");
+ mongoose.connect(process.env.MANGODb_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+     .then(() => {
+         console.log('MangoDB connected wth new database for project06');
+     })
+     .catch((error) => {
+         console.log("unable to connect MangoDB");
         console.error(error);
-    });
+     });
+//------------//? End of useing .env file --------//
 
 //------------CORS Header ------------------//
 
